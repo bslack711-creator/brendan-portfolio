@@ -312,6 +312,90 @@
   .represented p{ margin: 0 0 8px; }
   .represented a{ text-decoration: underline; text-underline-offset: 3px; }
 
+  /* ---------- print club ---------- */
+  .printclub{
+    padding: 64px 0 110px;
+  }
+  .printclub h2{
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 4vw, 40px);
+    margin: 0 0 10px;
+  }
+  .printclub-sub{
+    font-size: 16px;
+    color: var(--muted);
+    margin: 0 0 48px;
+  }
+  .printclub-body{
+    display: grid;
+    grid-template-columns: 0.9fr 1fr;
+    gap: 8vw;
+    align-items: start;
+  }
+  .printclub-art{ aspect-ratio: 1 / 1; }
+  .printclub-copy p{
+    font-size: 16px;
+    line-height: 1.7;
+    color: #3b352e;
+    max-width: 44ch;
+    margin: 0 0 24px;
+  }
+  .printclub-details{
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .printclub-details li{
+    padding-left: 18px;
+    position: relative;
+  }
+  .printclub-details li::before{
+    content: "";
+    position: absolute;
+    left: 0; top: 8px;
+    width: 6px; height: 6px;
+    background: var(--stone-deep);
+    border-radius: 50%;
+  }
+  .printclub-price{
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    margin-bottom: 20px;
+  }
+  .printclub-price span{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .printclub-cta{
+    display: inline-block;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    padding: 14px 28px;
+    border-radius: 2px;
+    transition: opacity 0.2s ease;
+  }
+  .printclub-cta:hover{ opacity: 0.85; }
+  .printclub-note{
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--muted);
+    max-width: 40ch;
+  }
+
+  @media (max-width: 860px){
+    .printclub-body{ grid-template-columns: 1fr; gap: 40px; }
+  }
+
   footer{
     padding: 26px 6vw 40px;
     font-size: 12px;
@@ -348,6 +432,7 @@
       <li><button data-view="paintings">Paintings</button></li>
       <li><button data-view="drawings">Drawings</button></li>
       <li><button data-view="fragments">Fragments</button></li>
+      <li><button data-view="printclub">Print Club</button></li>
       <li><button data-view="about">About</button></li>
       <li><button data-view="contact">Contact</button></li>
     </ul>
@@ -441,6 +526,37 @@
     </section>
   </div>
 
+  <!-- PRINT CLUB VIEW -->
+  <div class="view" id="view-printclub">
+    <section>
+      <div class="printclub">
+        <h2>Print Club</h2>
+        <p class="printclub-sub">A new piece delivered to your door, every month.</p>
+
+        <div class="printclub-body">
+          <div class="art printclub-art"><span class="art-label">Add a print club preview image</span></div>
+
+          <div class="printclub-copy">
+            <p>Each month, subscribers receive a fine art print made just for the club, signed and numbered, along with a short note about the piece.</p>
+
+            <ul class="printclub-details">
+              <li>1 fine art print per month</li>
+              <li>Signed and numbered</li>
+              <li>Shipped anywhere</li>
+              <li>Cancel anytime</li>
+            </ul>
+
+            <div class="printclub-price">$9<span>/month</span></div>
+
+            <a class="printclub-cta" href="https://buy.stripe.com/cNi4gAa6y3LfaVs8YH4Rq00" target="_blank" rel="noopener">Join the Print Club</a>
+
+            <p class="printclub-note">You'll be taken to a secure checkout to complete your subscription.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <!-- ABOUT VIEW -->
   <div class="view" id="view-about">
     <section>
@@ -507,7 +623,7 @@
   });
 
   const initial = location.hash.replace('#', '');
-  const valid = ['paintings', 'drawings', 'fragments', 'about', 'contact'];
+  const valid = ['paintings', 'drawings', 'fragments', 'printclub', 'about', 'contact'];
   showView(valid.includes(initial) ? initial : 'home');
 </script>
 
