@@ -544,15 +544,20 @@
       }
     });
     window.scrollTo({ top: 0, behavior: 'auto' });
-    history.replaceState(null, '', name === 'home' ? '#' : '#' + name);
+    history.replaceState(null, '', name === 'home' ? '/' : '/' + name);
   }
 
   navButtons.forEach(btn => {
     btn.addEventListener('click', () => showView(btn.dataset.view));
   });
 
-  const initial = location.hash.replace('#', '');
   const valid = ['work', 'printclub', 'contact'];
+  // Support real paths (/printclub) as the primary format, since Instagram's
+  // bio link wrapper can strip #hash fragments. Still honor old #hash links
+  // for backward compatibility.
+  const pathName = location.pathname.replace(/^\/|\/$/g, '');
+  const hashName = location.hash.replace('#', '');
+  const initial = valid.includes(pathName) ? pathName : hashName;
   showView(valid.includes(initial) ? initial : 'home');
 </script>
 
